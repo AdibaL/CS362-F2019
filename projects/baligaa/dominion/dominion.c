@@ -884,14 +884,16 @@ int tributeCard(struct gameState *state, int tributeRevealedCards[], int nextPla
         state->deckCount[nextPlayer]--;
     }
 
-    if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
+    //Bug introduced.  If cards are NOT equal, one will be dropped rather than equal.
+    if (tributeRevealedCards[0] != tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
         state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
         state->playedCardCount++;
         tributeRevealedCards[1] = -1;
     }
 
     for (int i = 0; i <= 2; i ++) {
-        if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
+        //Bug introduced.  Instead of silver OR gold, revised to silver AND gold condition.
+        if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver && tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
         }
 
