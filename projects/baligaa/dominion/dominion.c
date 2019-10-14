@@ -920,13 +920,14 @@ int mineCard(struct gameState *state, int currentPlayer, int choice1, int choice
     {
         return -1;
     }
-
-    if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
+    //bug introduced.  Value of treasure card does not increase by 3. 0 instead.
+    if ( (getCost(state->hand[currentPlayer][choice1]) + 0) > getCost(choice2) )
     {
         return -1;
     }
 
-    gainCard(choice2, state, 2, currentPlayer);
+    //Bug introduced.  Setting toFlag to 0 instead of 2.  Card sent to discard pile instead of hand.
+    gainCard(choice2, state, 0, currentPlayer);
 
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
