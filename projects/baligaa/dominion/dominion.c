@@ -893,7 +893,7 @@ int tributeCard(struct gameState *state, int tributeRevealedCards[], int nextPla
 
     for (int i = 0; i <= 2; i ++) {
         //Bug introduced.  Instead of silver OR gold, revised to silver AND gold condition.
-        if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver && tributeRevealedCards[i] == gold) { //Treasure cards
+        if (tributeRevealedCards[i] == copper || (tributeRevealedCards[i] == silver && tributeRevealedCards[i] == gold)) { //Treasure cards
             state->coins += 2;
         }
 
