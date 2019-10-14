@@ -814,17 +814,19 @@ int ambassadorCard(int choice1, int choice2, struct gameState *state, int handPo
     if (DEBUG)
         printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
 
+    //Bug introduced.  supplyCount is decremented by choice2 rather than incremented.
     //increase supply count for choosen card by amount being discarded
-    state->supplyCount[state->hand[currentPlayer][choice1]] += choice2;
+    state->supplyCount[state->hand[currentPlayer][choice1]] -= choice2;
 
     //each other player gains a copy of revealed card
     for (int i = 0; i < state->numPlayers; i++)
     {
         if (i != currentPlayer)
         {
-            gainCard(state->hand[currentPlayer][choice1], state, 0, i);
+            //Bug added.  gainCard function is never called.
+            //gainCard(state->hand[currentPlayer][choice1], state, 0, i);
         }
-    }
+    }   
 
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);
