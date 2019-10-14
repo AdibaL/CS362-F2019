@@ -737,8 +737,9 @@ int minionCard(int choice1, int choice2, struct gameState *state, int handPos, i
     //+1 action
     state->numActions++;
 
+    //bug added.  
     //discard card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    discardCard(handPos, currentPlayer, state, 1);
 
     if (choice1)
     {
@@ -752,8 +753,9 @@ int minionCard(int choice1, int choice2, struct gameState *state, int handPos, i
             discardCard(handPos, currentPlayer, state, 0);
         }
 
+        //bug added.  Set condition to i <= 4 instead of i < 4.
         //draw 4
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= 4; i++)
         {
             drawCard(currentPlayer, state);
         }
